@@ -9,10 +9,7 @@ len <- str_length(input) / 2
 one <- input |> str_sub(1, len) |> str_split("")
 two <- input |> str_sub(len + 1, -1L) |> str_split("")
 
-parse_letter <- function(x) {
-  if (x %in% letters) return(which(letters == x))
-  which(LETTERS == x) + 26
-}
+parse_letter <- function(x) which(c(letters, LETTERS) == x)
 
 map2_chr(one, two, intersect) |>
   map_dbl(parse_letter) |>

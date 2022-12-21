@@ -1,7 +1,5 @@
-library(tidyverse)
-
-trees <- read_lines("day08.txt") |>
-  str_split("", simplify = TRUE) |>
+trees <- readr::read_lines("day08.txt") |>
+  stringr::str_split("", simplify = TRUE) |>
   apply(2, as.numeric)
 
 
@@ -44,9 +42,9 @@ for (i in 2:(nr - 1)) {
       r = trees[i, -(1:j)],
       b = trees[-(1:i), j]
       ) |>
-      map_at(c("u", "l"), rev) |>
-      map(\(x) if (all(x < tree)) length(x) else which.min(x < tree)) |>
-      reduce(`*`)
+      purrr::map_at(c("u", "l"), rev) |>
+      purrr::map(\(x) if (all(x < tree)) length(x) else which.min(x < tree)) |>
+      purrr::reduce(`*`)
 
     scores[i, j] <- score
 
